@@ -1,11 +1,36 @@
 #!/bin/bash
 
-SARDIR="/var/log/sa/"
+SARDIR="/var/log/sysstat/"
 SAR="/usr/bin/sar"
 DAYS="30"
 
-#Get a list of files
-FILES=$(ls -tr $SARDIR|grep -e "sa[0-9][0-9]$"|tail -$DAYS)
+#Make sure that all the configured variables are validated.
+if [ ! -d "$SARDIR" ]; then 
+	echo
+	echo "$SARDIR does not exists!"
+	echo
+	exit 1
+fi
+
+if [ ! -x "$SAR" ]; then
+        echo
+        echo "$SAR does not exists or it's not executable!"
+        echo
+        exit 1
+fi
+
+DAYSFIXED=$(echo $DAYS | tr -d -c [:digit:]) 	#Delete all non digit characters from this string
+test "$DAYSFIXED" -eq "$DAYSFIXED" 2>/dev/null	#The integer equality test will validate if this is an integer
+
+if [ "$?" -ne "0" ]; then
+	echo
+	echo "$DAYS is not a number or cannot be converted to a number!"
+	echo
+	exit 1
+fi
+
+#Get a list of valid sar files
+FILES=$(ls -tr $SARDIR|grep -e "sa[0-9][0-9]$"|tail -$DAYSFIXED)
 
 function print_cpu {
 
@@ -109,10 +134,17 @@ function print_ram {
 
 }
 
-echo "Showing graphs for up to $DAYS days ago"
 echo
+echo "NOTE: Showing graphs for up to $DAYSFIXED days ago"
+echo
+
 print_load
 echo
+
 print_cpu
 echo
+
 print_ram
+echo
+
+exit 0
