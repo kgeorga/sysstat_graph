@@ -1,10 +1,4 @@
 #!/bin/bash
-#
-# This script graphs the statistics from sar files using hash signs "#".
-# Created by: Kostas Georgakopoulos
-# Last modified: 14/12/2013
-#
-#
 
 SARDIR="/var/log/sa/"
 SAR="/usr/bin/sar"
