@@ -14,7 +14,7 @@ Right now it graphs:
 Example Output
 --------------
 
-<code>
+<pre><code>
 
 Showing graphs for up to 30 days ago
 
@@ -63,7 +63,7 @@ Showing graphs for up to 30 days ago
 2014-01-02  : ########################### (27 %)                                                                                                                                                                                             
 2014-01-03  : ######################### (25 %)
  
-</code>
+</pre></code>
 
 Author
 ------
