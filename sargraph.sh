@@ -29,6 +29,7 @@ function print_stats {
 	       	echo -n " ($VALUE$PERCENTAGE) "
 
 		[ "$VALUE" -lt 100 ] && echo -n " "
+		[ "$VALUE" -lt 10 ] && echo -n " "
 
 	        for j in $(seq 1 $VALUE);do echo -n "#";done
 		
@@ -72,9 +73,11 @@ for i in $FILES;do
 	#CPU usage value checks
 	CPU_VALUE=${CPU_VALUE/.*} 											#Remove any decimal points
 	[ "$CPU_VALUE" -eq "$CPU_VALUE" ] 2>/dev/null; [ "$?" -eq 0 ] && CPU_VALUE=$((100-$CPU_VALUE)) || CPU_VALUE=0	#Test if it's a number: if so calculate the "used" percentage, else set it to 0
+
 	
 	#RAM value checks
 	[ "$RAM_VALUE" -eq "$RAM_VALUE" ] 2>/dev/null; [ "$?" -eq 0 ] && RAM_VALUE=$(echo "($RAM_VALUE/$MEMTOTAL)*100" | bc -l);RAM_VALUE=${RAM_VALUE/.*} || RAM_VALUE=0 #Test if it's a number: if so calculate the percentage over the total memory, else set it to 0
+	[ "$RAM_VALUE" == "" ] && RAM_VALUE=0	#The last transformation can leave this variable empty so check and set it to 0 if needed.
 
 	#LOADAVG value checks
         LOADAVG_VALUE=${LOADAVG_VALUE/.*}								#Remove any decimal points
