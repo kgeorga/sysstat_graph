@@ -1,4 +1,4 @@
-Sargraph README
+sarhash README
 ===============
 
 General Description
