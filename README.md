@@ -1,5 +1,5 @@
-sarhash README
-===============
+sysstat_graph README
+====================
 
 General Description
 -------------------
