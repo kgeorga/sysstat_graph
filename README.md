@@ -5,11 +5,22 @@ General Description
 -------------------
 
 This simple bash script graphs the statistics from sar files using hash signs "#".
+The information is extracted using the "sar" command and using grep to get the "Average" output line.
+
 Right now it graphs:
 
-* CPU usage
-* Load average
-* Actual RAM usage (minus buffers and cache)
+* CPU usage (Daily average - this calculated as 100 - Idle CPU percentage)
+* Load average (Daily 1 min load average average)
+* Actual RAM usage (Daily average of the actual RAM usage - minus buffers and cache)
+
+Usage
+-----
+
+You can simply run it on a server where sysstat is installed and gathering statistics. The script has some basic environment variables that tune its behaviour:
+
+SARDIR="/var/log/sa/"	: the location of the sysstat files
+SAR="/usr/bin/sar"	: the location of the "sar" executable            
+DAYS="30"		: how many days (files essentially) will the script attempt to grab from the sysstat directory
 
 Example Output
 --------------
