@@ -19,7 +19,9 @@ Usage
 You can simply run it on a server where sysstat is installed and gathering statistics. The script has some basic environment variables that tune its behaviour:
 
 SARDIR="/var/log/sa/"	: the location of the sysstat files
+
 SAR="/usr/bin/sar"	: the location of the "sar" executable            
+
 DAYS="30"		: how many days (files essentially) will the script attempt to grab from the sysstat directory
 
 Example Output
